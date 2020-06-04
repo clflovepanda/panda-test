@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-container>
-      <el-header class="header">Panda测试框架 V2.0</el-header>
+      <el-header class="header">PandaQ V2.0 —— Alpha版</el-header>
       <el-container>
         <el-aside width="200px">
           <Menu/>

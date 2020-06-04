@@ -4,10 +4,10 @@
       <template>
         <el-tabs v-model="sceneMgActiveName">
           <el-tab-pane label="模块管理" name="first">
-              <ModuleManagement/>
+            <ModuleManagement />
           </el-tab-pane>
           <el-tab-pane label="场景管理" name="second">
-            <SceneManagement/>
+            <SceneManagement />
           </el-tab-pane>
         </el-tabs>
       </template>
@@ -16,18 +16,18 @@
 </template>
 
 <script>
-
 import ModuleManagement from "~/components/ModuleManagement";
 import SceneManagement from "~/components/SceneManagement";
 
 export default {
-    components: {
-        ModuleManagement, SceneManagement
-    },
-    data: () => {
-        return {
-            sceneMgActiveName: "first"
-        }
-    }
-}
+  components: {
+    ModuleManagement,
+    SceneManagement
+  },
+  data: () => {
+    return {
+      sceneMgActiveName: "first"
+    };
+  }
+};
 </script>

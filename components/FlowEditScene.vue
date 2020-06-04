@@ -36,27 +36,39 @@ export default {
       return this.$store.state.sceneData.sceneModuleList;
     },
     vuexSceneEditStatus() {
-        return this.$store.state.flowStatus.sceneEditStatus;
+      return this.$store.state.flowStatus.sceneEditStatus;
     },
     vuexSceneList() {
-        return this.$store.state.sceneData.tempSceneData;
+      return this.$store.state.sceneData.tempSceneData;
     }
   },
   watch: {
-      vuexSceneEditStatus(newVal, oldVal) {
-          this.showStatus = this.$store.state.flowStatus.sceneEditStatus;
-      },
-      showStatus(newVal, oldVal) {
-          this.$store.commit("flowStatus/updateSceneEditStatus", newVal);
-      },
-      vuexSceneList(newVal, oldVal) {
-          this.rowData = JSON.parse(JSON.stringify(this.$store.state.sceneData.tempSceneData));
-      }
+    vuexSceneEditStatus(newVal, oldVal) {
+      this.showStatus = this.$store.state.flowStatus.sceneEditStatus;
+    },
+    showStatus(newVal, oldVal) {
+      this.$store.commit("flowStatus/updateSceneEditStatus", newVal);
+    },
+    vuexSceneList(newVal, oldVal) {
+      this.rowData = JSON.parse(
+        JSON.stringify(this.$store.state.sceneData.tempSceneData)
+      );
+    }
   },
   methods: {
-    save: function() {
-        this.$store.commit("sceneData/updateSceneData", this.rowData);
-        this.showStatus = false;
+    save: async function() {
+      this.$store.commit("sceneData/updateSceneData", this.rowData);
+      this.showStatus = false;
+
+      await this.$axios.post(
+        "/api/setModuleList",
+        JSON.stringify(this.$store.state.sceneData.sceneModuleList) + "\r\n",
+        {
+          headers: {
+            "content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+          }
+        }
+      );
     }
   }
 };

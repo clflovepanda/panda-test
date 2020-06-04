@@ -33,36 +33,55 @@ export default {
     };
   },
   computed: {
-      vuexSceneCreateStatus() {
-          return this.$store.state.flowStatus.sceneCreateStatus;
-      },
-      vuexModuleList() {
-          return this.$store.state.sceneData.sceneModuleList;
-      }
+    vuexSceneCreateStatus() {
+      return this.$store.state.flowStatus.sceneCreateStatus;
+    },
+    vuexModuleList() {
+      return this.$store.state.sceneData.sceneModuleList;
+    }
   },
   watch: {
-      vuexSceneCreateStatus(newVal, oldVal) {
-          this.showStatus = this.$store.state.flowStatus.sceneCreateStatus;
-      },
-      showStatus(newVal, oldVal) {
-          this.$store.commit("flowStatus/updateSceneCreateStatus", newVal);
-      }
+    vuexSceneCreateStatus(newVal, oldVal) {
+      this.showStatus = this.$store.state.flowStatus.sceneCreateStatus;
+    },
+    showStatus(newVal, oldVal) {
+      this.$store.commit("flowStatus/updateSceneCreateStatus", newVal);
+    }
   },
   methods: {
-    createScene: function() {
-        if(this.rowData.name == null) {
-            this.$message.error("name不可以为空");
-            return;
+    createScene: async function() {
+      if (this.rowData.name == null) {
+        this.$message.error("name不可以为空");
+        return;
+      }
+      if (this.rowData.moduleName == null) {
+        this.$message.error("模块不能为空");
+        return;
+      }
+      if (this.rowData.comments == null) {
+        this.rowData.comments = "";
+      }
+      this.$store.state.sceneData.sceneModuleList.forEach(element => {
+        if (element.name = this.rowData.moduleName) {
+          element.sceneInfos.forEach(el => {
+            if (el.name == this.rowData.name) {
+              this.$message.error("场景名重复");
+              return;
+            }
+          });
         }
-        if(this.rowData.moduleName == null) {
-            this.$message.error("模块不能为空");
-            return;
+      });
+      this.$store.commit("sceneData/addScene", this.rowData);
+      this.showStatus = false;
+      await this.$axios.post(
+        "/api/setModuleList",
+        JSON.stringify(this.$store.state.sceneData.sceneModuleList) + "\r\n",
+        {
+          headers: {
+            "content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+          }
         }
-        if(this.rowData.comments == null) {
-            this.rowData.comments = "";
-        }
-        this.$store.commit("sceneData/addScene", this.rowData);
-        this.showStatus = false;
+      );
     },
     resetForm: function(formName) {
       this.$refs[formName].resetFields();

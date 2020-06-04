@@ -50,12 +50,21 @@ export default {
     }
   },
   methods: {
-      save: function() {
+      save: async function() {
         this.$store.commit("serviceData/updateInterfaceList", {
             serviceName: this.$store.state.serviceData.tempSelectService, 
             rowData: this.rowData
         });
         this.showStatus = false;
+        await this.$axios.post(
+        "/api/setServiceDomTree",
+        JSON.stringify(this.$store.state.serviceData.serviceList) + "\r\n",
+        {
+          headers: {
+            "content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+          }
+        }
+      );
       }
   }
 };

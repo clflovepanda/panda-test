@@ -4,7 +4,7 @@ export const state = () => ({
             name: "IRimRoomService1",
             secondName: "招聘方IM中台房间服务1",
             comments: "关于招聘方视频房间相关功能1",
-            interfaces: [
+            methodInfos: [
                 {
                     name: "enterRoom",
                     secondName: "进入房间",
@@ -16,14 +16,14 @@ export const state = () => ({
             name: "IRimRoomService2",
             secondName: "招聘方IM中台房间服务2",
             comments: "关于招聘方视频房间相关功能2",
-            interfaces: [
+            methodInfos: [
 
             ]
         }, {
             name: "IRimRoomService3",
             secondName: "招聘方IM中台房间服务3",
             comments: "关于招聘方视频房间相关功能3",
-            interfaces: [
+            methodInfos: [
 
             ]
         }
@@ -56,7 +56,7 @@ export const mutations = {
         let infRowData = obj.rowData;
         state.serviceList.forEach(element => {
             if (element.name == serviceName) {
-                element.interfaces.forEach(infEle => {
+                element.methodInfos.forEach(infEle => {
                     if (infEle.name == infRowData.name) {
                         infEle.secondName = infRowData.secondName;
                         infEle.comments = infRowData.comments;

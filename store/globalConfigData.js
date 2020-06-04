@@ -2,54 +2,14 @@
 export const state = () => ({
     globalConfigList: [
         {
-            name: "我的UsereId",
-            type: "Integer",
+            name: "UserEId",
+            type: "Long",
             value: "123456",
             comments: "用于测试的招聘方ID"
         },{
-            name: "我的UsereId",
-            type: "Integer",
-            value: "123456",
-            comments: "用于测试的招聘方ID"
-        },{
-            name: "我的UsereId",
-            type: "Integer",
-            value: "123456",
-            comments: "用于测试的招聘方ID"
-        },{
-            name: "我的UsereId",
-            type: "Integer",
-            value: "123456",
-            comments: "用于测试的招聘方ID"
-        },{
-            name: "我的UsereId",
-            type: "Integer",
-            value: "123456",
-            comments: "用于测试的招聘方ID"
-        },{
-            name: "我的UsereId",
-            type: "Integer",
-            value: "123456",
-            comments: "用于测试的招聘方ID"
-        },{
-            name: "我的UsereId",
-            type: "Integer",
-            value: "123456",
-            comments: "用于测试的招聘方ID"
-        },{
-            name: "我的UsereId",
-            type: "Integer",
-            value: "123456",
-            comments: "用于测试的招聘方ID"
-        },{
-            name: "我的UsereId",
-            type: "Integer",
-            value: "123456",
-            comments: "用于测试的招聘方ID"
-        },{
-            name: "我的UsereId",
-            type: "Integer",
-            value: "123456",
+            name: "UserCId",
+            type: "Long",
+            value: "333444",
             comments: "用于测试的招聘方ID"
         }
     ]

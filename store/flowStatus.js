@@ -7,7 +7,8 @@ export const state = () => ({
     sceneEditStatus: false,
     globalConfigCreateStatus: false,
     sortServiceStatus: false,
-    configParamsStatus: false
+    configParamsStatus: false,
+    addInfStatus: false
 })
 
 export const mutations = {
@@ -37,5 +38,8 @@ export const mutations = {
     },
     updateConfigParamsStatus(state, newVal) {
         state.configParamsStatus = newVal;
+    },
+    updateAddInfStatus(state, newVal) {
+        state.addInfStatus = newVal;
     }
 }

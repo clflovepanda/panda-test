@@ -32,6 +32,7 @@
             <el-table-column prop="secondName" label="别名"></el-table-column>
             <el-table-column prop="comments" label="备注"></el-table-column>
             <el-table-column prop="params" label="参数"></el-table-column>
+            <el-table-column prop="resultInfo.type" label="返回值"></el-table-column>
             <el-table-column fixed="right" label="操作">
               <template slot-scope="scope">
                 <el-button type="text" size="middle" @click="showEditInfDialog(scope.row)">编辑</el-button>
@@ -42,7 +43,7 @@
       </el-col>
     </el-row>
 
-    <FlowEditInterface/>
+    <FlowEditInterface />
   </div>
 </template>
 
@@ -64,19 +65,32 @@ export default {
       interfaceList: []
     };
   },
+  watch: {
+    serviceList(newVal, oldVal) {
+      this.$store.state.serviceData.serviceList.forEach(element => {
+        if (element.name == this.infMagClassSelected) {
+          this.interfaceList = element.methodInfos;
+          return;
+        }
+      });
+    }
+  },
   methods: {
     infMagChooseClass: function() {
       this.$store.state.serviceData.serviceList.forEach(element => {
         if (element.name == this.infMagClassSelected) {
-          this.interfaceList = element.interfaces;
+          this.interfaceList = element.methodInfos;
           return;
         }
       });
     },
     showEditInfDialog: function(row) {
-        this.$store.commit("flowStatus/updateInterfaceEditStatus", true);
-        this.$store.commit("serviceData/updateTempRowInfoData", row);
-        this.$store.commit("serviceData/updateTempSelectService", this.infMagClassSelected);
+      this.$store.commit("flowStatus/updateInterfaceEditStatus", true);
+      this.$store.commit("serviceData/updateTempRowInfoData", row);
+      this.$store.commit(
+        "serviceData/updateTempSelectService",
+        this.infMagClassSelected
+      );
     }
   }
 };

@@ -37,7 +37,7 @@ export default {
     }
   },
   methods: {
-    createSceneModule: function() {
+    createSceneModule: async function() {
       let flag = false;
       this.$store.state.sceneData.sceneModuleList.forEach(element => {
         if (element.name == this.moduleData.name) {
@@ -51,6 +51,15 @@ export default {
       }
       this.$store.commit("sceneData/addSceneModule", this.moduleData);
       this.$store.commit("flowStatus/updateModuleCreateStatus", false);
+      await this.$axios.post(
+        "/api/setModuleList",
+        JSON.stringify(this.$store.state.sceneData.sceneModuleList) + "\r\n",
+        {
+          headers: {
+            "content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+          }
+        }
+      );
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();

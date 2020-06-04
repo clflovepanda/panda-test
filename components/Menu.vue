@@ -17,7 +17,7 @@
           </nuxt-link>
         </el-menu-item>
         <el-menu-item index="3">
-          <nuxt-link to="/interfaceModule" class="asideMenuItem">
+          <nuxt-link to="/autoTest" class="asideMenuItem">
             <div>
               <i class="el-icon-video-play"></i>自动化测试
             </div>
@@ -27,6 +27,13 @@
           <nuxt-link to="/globalConfigModule" class="asideMenuItem">
             <div>
               <i class="el-icon-tickets"></i>全局参数设置
+            </div>
+          </nuxt-link>
+        </el-menu-item>
+        <el-menu-item index="5">
+          <nuxt-link to="/dataStruct" class="asideMenuItem">
+            <div>
+              <i class="el-icon-cpu"></i>开发者数据
             </div>
           </nuxt-link>
         </el-menu-item>

@@ -49,9 +49,19 @@ export default {
         JSON.stringify(this.$store.state.sceneData.tempModuleData)
       );
     },
-    save: function() {
+    save: async function() {
       this.$store.commit("sceneData/updateModuleData", this.rowData);
       this.$store.commit("flowStatus/updateModuleEditStatus", false);
+
+      await this.$axios.post(
+        "/api/setModuleList",
+        JSON.stringify(this.$store.state.sceneData.sceneModuleList) + "\r\n",
+        {
+          headers: {
+            "content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+          }
+        }
+      );
     }
   }
 };

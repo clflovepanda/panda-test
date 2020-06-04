@@ -14,7 +14,7 @@
               v-for="item in sceneModuleList"
               class="item"
               effect="dark"
-              :content="item.comments"
+              :content="item.comments == null ? item.name : item.comments"
               placement="right"
               :key="item.name"
             >
@@ -84,9 +84,10 @@ export default {
       let moudleList = this.$store.state.sceneData.sceneModuleList;
       moudleList.forEach(element => {
         if (element.name == this.sceneModuleSelected) {
-          this.sceneList = element.scenes;
+          this.sceneList = element.sceneInfos;
         }
       });
+      this.$store.commit("sceneData/updateNowSortModule", this.sceneModuleSelected);
     },
     sceneCreate: function() {
       this.$store.commit("flowStatus/updateSceneCreateStatus", true);
@@ -109,6 +110,7 @@ export default {
     },
     serviceSort: function(row) {
       this.$store.commit("flowStatus/updateSortService", true);
+      this.$store.commit("sceneData/updateNowSortScene", row.name);
     }
   }
 };
